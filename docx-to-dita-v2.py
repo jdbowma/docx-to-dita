@@ -26,7 +26,7 @@ def docx_to_dita_task(docx_path, dita_path, task_id, images_dir=None, ask_for_ea
     image_counter = 1
     
     for para in doc.paragraphs[1:]:  # Skipping the first paragraph (title)
-        if para.style.name == 'List Paragraph':
+        if para.style.name == 'List Paragraph' or para.style.name == 'List Number':
             # New main step
             current_step = ET.SubElement(steps, 'step')
             step_cmd = ET.SubElement(current_step, 'cmd')
