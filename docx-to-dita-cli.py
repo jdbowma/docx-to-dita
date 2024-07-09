@@ -23,6 +23,7 @@ def docx_to_dita_task(docx_path, dita_path, task_id):
     current_step = None
     
     for para in doc.paragraphs[1:]:  # Skipping the first paragraph (title)
+        print(f"{para.style}")
         if para.style.name == 'List Paragraph':
             # New main step
             current_step = ET.SubElement(steps, 'step')
@@ -64,7 +65,6 @@ def main():
     docx_path = sys.argv[1]
     dita_path = sys.argv[2]
     task_id = sys.argv[3]
-    
     if not docx_path.lower().endswith('.docx'):
         print("Input file must be a .docx file.")
         sys.exit(1)

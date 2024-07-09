@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 import xml.dom.minidom
 import os
 
-def docx_to_dita_task(docx_path, dita_path, task_id):
+def docx_to_dita_task(docx_path, dita_path, task_id, images_dir=None, ask_for_each_image=False):
     doc = Document(docx_path)
     
     # Create the root element of the DITA task document with task_id attribute
@@ -18,10 +18,12 @@ def docx_to_dita_task(docx_path, dita_path, task_id):
     # Add task body content
     task_body = ET.SubElement(root, 'taskbody')
     
-    # Process paragraphs to identify steps
+    # Process paragraphs to identify steps, substeps, and images
     steps = ET.SubElement(task_body, 'steps')
     
     current_step = None
+    current_substeps = None
+    image_counter = 1
     
     for para in doc.paragraphs[1:]:  # Skipping the first paragraph (title)
         if para.style.name == 'List Paragraph':
@@ -29,12 +31,51 @@ def docx_to_dita_task(docx_path, dita_path, task_id):
             current_step = ET.SubElement(steps, 'step')
             step_cmd = ET.SubElement(current_step, 'cmd')
             step_cmd.text = para.text.strip()
+            current_substeps = None
+        elif para.style.name == 'List Number 2' and current_step is not None:
+            # New substep
+            if current_substeps is None:
+                current_substeps = ET.SubElement(current_step, 'substeps')
+            substep = ET.SubElement(current_substeps, 'substep')
+            substep_cmd = ET.SubElement(substep, 'cmd')
+            substep_cmd.text = para.text.strip()
         else:
             # Regular paragraphs are added as step info
             if current_step is not None:
                 step_info = ET.SubElement(current_step, 'info')
                 step_info.text = para.text.strip()
     
+    # Handle images
+    if images_dir or ask_for_each_image:
+        for rel in doc.part.rels.values():
+            if "image" in rel.target_ref:
+                image = rel.target_part
+                image_data = image.blob
+                image_ext = os.path.splitext(image.partname)[-1]
+                
+                if ask_for_each_image:
+                    image_filename = filedialog.asksaveasfilename(
+                        defaultextension=image_ext,
+                        filetypes=[("Image files", f"*{image_ext}")],
+                        title=f"Save image {image_counter}"
+                    )
+                    if not image_filename:
+                        continue
+                else:
+                    image_filename = f"image{image_counter}{image_ext}"
+                    image_path = os.path.join(images_dir, image_filename)
+                
+                with open(image_path, 'wb') as img_file:
+                    img_file.write(image_data)
+                
+                image_counter += 1
+                
+                if current_step is not None:
+                    fig = ET.SubElement(current_step, 'fig')
+                    title = ET.SubElement(fig, 'title')
+                    title.text = ""  # Default to empty
+                    image_ref = ET.SubElement(fig, 'image', href=image_filename)
+
     # Create a new XML tree
     tree = ET.ElementTree(root)
     
@@ -63,10 +104,18 @@ def browse_file():
         input_path_entry.delete(0, tk.END)
         input_path_entry.insert(0, filename)
 
+def select_images_dir():
+    directory = filedialog.askdirectory()
+    if directory:
+        images_dir_entry.delete(0, tk.END)
+        images_dir_entry.insert(0, directory)
+
 def convert_file():
     input_path = input_path_entry.get()
     output_path = output_path_entry.get()
     task_id = task_id_entry.get()
+    images_dir = images_dir_entry.get() if images_checkbox_var.get() and not ask_each_image_var.get() else None
+    ask_for_each_image = ask_each_image_var.get()
     
     if not input_path:
         messagebox.showerror("Error", "Please select an input file.")
@@ -88,16 +137,30 @@ def convert_file():
         output_path += '.dita'
     
     try:
-        docx_to_dita_task(input_path, output_path, task_id)
+        if images_dir and not os.path.exists(images_dir):
+            os.makedirs(images_dir)
+        docx_to_dita_task(input_path, output_path, task_id, images_dir, ask_for_each_image)
         messagebox.showinfo("Success", f"Conversion completed successfully. Output saved to {output_path}")
-        
-        # Clear input and output path entries after successful conversion
         input_path_entry.delete(0, tk.END)
         output_path_entry.delete(0, tk.END)
         task_id_entry.delete(0, tk.END)
-        
+        images_dir_entry.delete(0, tk.END)
+        images_checkbox_var.set(0)
+        ask_each_image_var.set(0)
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred during conversion:\n{str(e)}")
+
+def toggle_images_options():
+    if images_checkbox_var.get():
+        images_dir_label.grid(row=4, column=0, padx=10, pady=5, sticky=tk.W)
+        images_dir_entry.grid(row=4, column=1, padx=10, pady=5)
+        browse_images_dir_button.grid(row=4, column=2, padx=10, pady=5)
+        ask_each_image_checkbox.grid(row=5, column=1, padx=10, pady=5, sticky=tk.W)
+    else:
+        images_dir_label.grid_remove()
+        images_dir_entry.grid_remove()
+        browse_images_dir_button.grid_remove()
+        ask_each_image_checkbox.grid_remove()
 
 # GUI setup
 root = tk.Tk()
@@ -127,8 +190,22 @@ task_id_label.grid(row=2, column=0, padx=10, pady=5, sticky=tk.W)
 task_id_entry = tk.Entry(root, width=50)
 task_id_entry.grid(row=2, column=1, padx=10, pady=5)
 
+# Images Checkbox
+images_checkbox_var = tk.IntVar()
+images_checkbox = tk.Checkbutton(root, text="Include images", variable=images_checkbox_var, command=toggle_images_options)
+images_checkbox.grid(row=3, column=0, columnspan=2, padx=10, pady=5)
+
+# Images Directory
+images_dir_label = tk.Label(root, text="Images directory:")
+images_dir_entry = tk.Entry(root, width=50)
+browse_images_dir_button = tk.Button(root, text="Browse", command=select_images_dir)
+
+# Ask for each image
+ask_each_image_var = tk.IntVar()
+ask_each_image_checkbox = tk.Checkbutton(root, text="Ask for each image", variable=ask_each_image_var)
+
 # Convert Button
 convert_button = tk.Button(root, text="Convert", command=convert_file)
-convert_button.grid(row=3, column=1, padx=10, pady=10)
+convert_button.grid(row=6, column=1, padx=10, pady=10)
 
 root.mainloop()
