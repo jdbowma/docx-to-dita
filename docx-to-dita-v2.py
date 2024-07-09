@@ -90,6 +90,12 @@ def convert_file():
     try:
         docx_to_dita_task(input_path, output_path, task_id)
         messagebox.showinfo("Success", f"Conversion completed successfully. Output saved to {output_path}")
+        
+        # Clear input and output path entries after successful conversion
+        input_path_entry.delete(0, tk.END)
+        output_path_entry.delete(0, tk.END)
+        task_id_entry.delete(0, tk.END)
+        
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred during conversion:\n{str(e)}")
 
