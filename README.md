@@ -12,11 +12,13 @@ Available in both GUI and CLI versions (CLI version lacks in features at the mom
 - Automatic short descriptions and titles (user is prompted to confirm title and short description)
 
 ### Planned features:
+- Batch/bulk conversions
 - Concept and reference topic types
-- Automatic fig/image captions
+- Automatic fig titles /image captions
 - Better image handling
 - Tables
 - Optimized algorithms
+- Better looking GUI
 - Improved detection of lists and sub-lists (not relying on the List Number/List Number 2 styles)
 
 ### Known issues:
