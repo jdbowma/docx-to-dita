@@ -1,15 +1,17 @@
 # DITAfy - Convert Microsoft Word (.docx) to Software Documentation Using DITA
 ![DITAfy logo](https://github.com/jdbowma/docx-to-dita/blob/main/ditafy-removebg-preview.png)
-#### DITAfy Docx-to-DITA is a GUI Python app that converts Microsoft Word '.docx' files into DITA XML for use in documentation authoring applications like Oxygen XML Author. It is currently in its very early alpha phase and should be considered unreliable.
+#### DITAfy Docx-to-DITA is a GUI Python app that converts Microsoft Word '.docx' files into DITA XML for use in documentation authoring applications like Oxygen XML Author. It is currently in its very early alpha phase.
 
 Available in both GUI and CLI versions (CLI version lacks in features at the moment). 
 
 ### Current features:
 - Convert a .docx file to a DITA task topic nearly instantly. Conversion times are typically faster than Oxygen's MS Word to DITA conversion. Currently only supports task topics. It relies upon steps being in a numbered (List Paragraph or List Number/List Number 2 list for now
-- Automatic image handling (in early testing stages)
+- Automatic image handling **
 - Automatic note handling (any paragraph that starts with Note: will be turned into a <info><note> tag. There is an option to disable this and also an option to ask if each detected note is actually a note)
 - Automatic keyword and phrase replacement (automatically detect terms and phrases that should be replaced with DITA keys, configurable from a preferences menu or from a preferences.json file. Works for other things too, not just keywords)
 - Automatic short descriptions and titles (user is prompted to confirm title and short description)
+
+** In early testing stages
 
 ### Planned features:
 - Batch/bulk conversions
