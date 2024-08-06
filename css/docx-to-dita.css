@@ -1,38 +1,84 @@
+<<<<<<< Updated upstream
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+=======
+/* Reset some basic elements for consistency across browsers */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+>>>>>>> Stashed changes
 }
 
 header {
     background: #333;
     color: #fff;
+<<<<<<< Updated upstream
     padding: 1em 0;
     text-align: center;
+=======
+    padding: 20px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+>>>>>>> Stashed changes
 }
 
 header h1 {
     margin: 0;
+<<<<<<< Updated upstream
     font-size: 2em;
+=======
+    font-size: 2.5em;
+>>>>>>> Stashed changes
 }
 
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
+<<<<<<< Updated upstream
     text-align: center;
+=======
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+>>>>>>> Stashed changes
 }
 
 nav ul li {
     display: inline;
+<<<<<<< Updated upstream
     margin: 0 10px;
+=======
+>>>>>>> Stashed changes
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
+<<<<<<< Updated upstream
 }
 
 main {
@@ -43,19 +89,95 @@ main {
 
 h2 {
     color: #333;
+=======
+    padding: 0.5em 1em;
+    transition: background 0.3s, color 0.3s;
+}
+
+nav ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+.hero {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
+.hero .btn {
+    background: #fff;
+    color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+    margin: 0 10px;
+}
+
+.hero .btn:hover {
+    background: #0056b3;
+    color: #fff;
+}
+
+main {
+    padding: 2em 0;
+}
+
+h2 {
+    color: #007bff;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    text-align: center;
+>>>>>>> Stashed changes
 }
 
 section {
     margin-bottom: 2em;
+<<<<<<< Updated upstream
 }
 
 section#about p {
     font-size: 1.1em;
+=======
+    padding: 2em;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+section#about p,
+section#download p,
+section#demo p,
+section#docs p,
+section#contact p {
+    font-size: 1.1em;
+    text-align: justify;
+    line-height: 1.8;
+>>>>>>> Stashed changes
 }
 
 ul {
     padding: 0;
     list-style: none;
+<<<<<<< Updated upstream
+=======
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+>>>>>>> Stashed changes
 }
 
 ul li {
@@ -63,6 +185,7 @@ ul li {
 }
 
 ul li a {
+<<<<<<< Updated upstream
     color: #007BFF;
     text-decoration: none;
 }
@@ -73,16 +196,42 @@ ul li a:hover {
 
 button {
     background: #007BFF;
+=======
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    background: #007bff;
+    transition: background 0.3s, color 0.3s;
+}
+
+ul li a:hover {
+    background: #0056b3;
+    color: #fff;
+}
+
+button {
+    background: #007bff;
+>>>>>>> Stashed changes
     color: #fff;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 1em;
+<<<<<<< Updated upstream
+=======
+    transition: background 0.3s, transform 0.3s;
+>>>>>>> Stashed changes
 }
 
 button:hover {
     background: #0056b3;
+<<<<<<< Updated upstream
+=======
+    transform: translateY(-2px);
+>>>>>>> Stashed changes
 }
 
 footer {
@@ -90,7 +239,38 @@ footer {
     color: #fff;
     text-align: center;
     padding: 1em 0;
+<<<<<<< Updated upstream
     position: fixed;
     bottom: 0;
     width: 100%;
+=======
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+#demo-container {
+    margin-top: 1em;
+    text-align: center;
+}
+
+a.btn {
+    display: inline-block;
+    text-align: center;
+    color: #007bff;
+    background-color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+a.btn:hover {
+    background-color: #0056b3;
+    color: #fff;
+>>>>>>> Stashed changes
 }
