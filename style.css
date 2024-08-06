@@ -1,0 +1,147 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header */
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 1em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 4px solid #0056b3;
+}
+
+.logo-container {
+    margin-bottom: 0.5em;
+}
+
+.logo {
+    font-size: 3em;
+    font-weight: bold;
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
+    animation: gradientAnimation 5s linear infinite;
+}
+
+.logo span {
+    color: #333;
+}
+
+.angle-brackets {
+    color: #007bff;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 0%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 2em;
+}
+
+nav a {
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Hero Section */
+#hero {
+    text-align: center;
+    padding: 4em 1em;
+    background: linear-gradient(135deg, #007bff, #00d4ff);
+    color: #fff;
+}
+
+#hero h1 {
+    margin: 0;
+    font-size: 3em;
+    line-height: 1.2;
+}
+
+#hero p {
+    font-size: 1.25em;
+    margin: 0.5em 0 1em;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #fff;
+    color: #007bff;
+    padding: 0.75em 2em;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 5px;
+    text-transform: uppercase;
+    margin-top: 1em;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #e6e6e6;
+    color: #0056b3;
+}
+
+/* Sections */
+section {
+    padding: 4em 1em;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+}
+
+.feature {
+    margin-bottom: 2em;
+}
+
+.feature h3 {
+    font-size: 2em;
+}
+
+.feature p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #007bff;
+    color: #fff;
+    border-top: 4px solid #0056b3;
+}
