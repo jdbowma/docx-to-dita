@@ -30,9 +30,10 @@ Available in both GUI and CLI versions (CLI version lacks in features at the mom
 ### Installation:
 1. Install Python 3
 2. Install the python-docx module using pip (pip install python-docx)
-3. Download the most recent, stable feature build of the docx-to-dita.py script and run it from a directory with properly configured permissions (the script needs to be able to read and write files)
-4. Configure your keyword replacements from the settings window
-5. Begin converting docx to DITA.
+3. Install pillow (pip install pillow)
+4. Download the most recent, stable feature build of the docx-to-dita.py script and run it from a directory with properly configured permissions (the script needs to be able to read and write files)
+5. Configure your keyword replacements from the settings window
+6. Begin converting docx to DITA.
 
 ### Usage
 1. Click "Browse" next to the "Input .docx file" field and select a properly styled and formatted Microsoft Word (.docx) file.
@@ -41,3 +42,5 @@ Available in both GUI and CLI versions (CLI version lacks in features at the mom
 4. Check the "Check for Notes", "Prompt for Notes", and/or "Include Images" checkboxes depending on your needs.
 5. Click "Preferences" to configure keyword replacements.
 6. Press "Convert". Check the console for any errors.
+   
+![Workflow GIF](https://github.com/jdbowma/docx-to-dita/blob/main/53b3c9a6-5570-404f-8d39-d719bdac2cc9.gif)
